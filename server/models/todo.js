@@ -2,6 +2,7 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
+  // create Todo class with association method
   class Todo extends Model {
     /**
      * Helper method for defining associations.
@@ -9,11 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.TodoItem, {
+          foreignKey: 'todoId',
+          as: 'todoItems',
+        })
     }
   };
+
+  // instantiate Todo class with filed definitions
   Todo.init({
-    title: DataTypes.STRING
+    title: DataTypes.STRING,
+    allowNull: false,
   }, {
     sequelize,
     modelName: 'Todo',
