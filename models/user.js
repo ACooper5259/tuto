@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+    // toJSON is the function called to provide the payload from the request. We return the object from the get method, and through spreading it we can overwrite the id to undefined.
+    toJSON(){
+      return { ...this.get(), id: undefined }
+    }
   };
   User.init({
     uuid: {

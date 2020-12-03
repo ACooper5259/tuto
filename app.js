@@ -5,7 +5,17 @@ const { sequelize, User } = require('./models')
 
 const app = express()
 app.use(express.json())
-// first route
+
+app.get('/users', async(req, res) => {
+  try {
+    const users = await User.findAll()
+    return res.json(users)
+  } catch(err){
+    console.log ("error in listing users:", err)
+    return res.status(500).json({ error: "something went wrong" })
+  }
+})
+
 app.post('/users', async(req, res) => {
   const { name, email, role } = req.body
 
