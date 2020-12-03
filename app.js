@@ -5,7 +5,7 @@ const { sequelize, User } = require('./models')
 
 const app = express()
 app.use(express.json())
-
+// first route
 app.post('/users', async(req, res) => {
   const { name, email, role } = req.body
 
@@ -20,10 +20,11 @@ app.post('/users', async(req, res) => {
   }
 })
 
+// server
 app.listen({ port: 3000 }, async()=> {
   console.log('server up on port 3000')
-  await sequelize.sync({force:true})
-  console.log("databse synced")
+  await sequelize.authenticate()
+  console.log("databse connected")
 })
 
 
