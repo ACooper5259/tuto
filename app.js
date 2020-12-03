@@ -53,7 +53,7 @@ app.delete('/users/:uuid', async(req, res) => {
     });
     if (deleted) {
       console.log("user deleted")
-      return res.status(204).send("user deleted")
+      return res.status(204).json("user deleted")
     }
     throw new Error("user not found")
   } catch (err) {
